@@ -2,16 +2,18 @@ import Link from "next/link"
 import { experiences } from "@/data/experiences"
 
 interface ExperienceDetailPageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
-export default function ExperienceDetailPage({
+export default async function ExperienceDetailPage({
   params,
 }: ExperienceDetailPageProps) {
+  const { id } = await params
+
   const experience = experiences.find(
-    (item) => item.id === Number(params.id)
+    (item) => item.id === Number(id)
   )
 
   if (!experience) {
@@ -59,3 +61,4 @@ export default function ExperienceDetailPage({
     </main>
   )
 }
+  

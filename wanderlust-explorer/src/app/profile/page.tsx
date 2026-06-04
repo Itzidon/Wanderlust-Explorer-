@@ -1,4 +1,25 @@
+"use client"
+
+import { useEffect, useState } from "react"
+
 export default function ProfilePage() {
+  const [favoritesCount, setFavoritesCount] =
+    useState(0)
+
+  useEffect(() => {
+    const saved =
+      localStorage.getItem("favoriteIds")
+
+    const favorites =
+      saved
+        ? JSON.parse(saved)
+        : []
+
+    setFavoritesCount(
+      favorites.length
+    )
+  }, [])
+
   return (
     <main className="min-h-screen bg-gray-50 p-10">
 
@@ -25,16 +46,23 @@ export default function ProfilePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
             <div className="border rounded-xl p-6">
+
               <h2 className="font-semibold mb-2">
                 Favorites
               </h2>
 
-              <p className="text-gray-600">
-                Save your dream experiences
+              <p className="text-5xl font-bold">
+                {favoritesCount}
               </p>
+
+              <p className="text-gray-600">
+                Saved experiences
+              </p>
+
             </div>
 
             <div className="border rounded-xl p-6">
+
               <h2 className="font-semibold mb-2">
                 Destinations
               </h2>
@@ -42,9 +70,11 @@ export default function ProfilePage() {
               <p className="text-gray-600">
                 Explore new places
               </p>
+
             </div>
 
             <div className="border rounded-xl p-6">
+
               <h2 className="font-semibold mb-2">
                 Profile
               </h2>
@@ -52,6 +82,7 @@ export default function ProfilePage() {
               <p className="text-gray-600">
                 Personal information
               </p>
+
             </div>
 
           </div>
